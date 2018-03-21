@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/new-entry', 'HomeController@new_entry')->name('new-entry');
+
+Route::post('/search', 'CrossRefController@lookup_doi_article');

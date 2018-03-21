@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
@@ -13,8 +13,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    <div class="flex aic jc-sa">
+                        <a href="{{ url('/new-entry') }}"><div class="btn btn-success">New Entry</div></a>
+                        <a href="{{ url('/edit-entry') }}"><div class="btn btn-info">Edit Existing</div></a>
+                    </div>
                 </div>
             </div>
         </div>
