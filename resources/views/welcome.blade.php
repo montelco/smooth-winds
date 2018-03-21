@@ -4,6 +4,10 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="theme-color" content="#404850">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -16,8 +20,8 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                color: #636b6f;
+                background-color: #404850;
+                color: #fff;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
                 height: 100vh;
@@ -49,11 +53,11 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 60px;
             }
 
             .links > a {
-                color: #636b6f;
+                color: #f4faff;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -64,11 +68,12 @@
 
             .m-b-md {
                 margin-bottom: 30px;
+                line-height: initial;
             }
 
             .m-b-md span {
                 display: block;
-                color: #636b6f;
+                color: #c3c3c3;
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -95,7 +100,11 @@
                     Smooth Winds
                     <span class="text-muted">A Database Application for <strong>Rowan University</strong> Research</span>
                 </div>
-                    <a href="{{ url('/login') }}"><div class="btn btn-primary">Login</div></a>
+                    @auth
+                        <a href="{{ url('/home') }}"><div class="btn btn-success">Dashboard Home</div></a>
+                    @else
+                        <a href="{{ url('/login') }}"><div class="btn btn-primary">Login</div></a>
+                    @endauth
             </div>
         </div>
     </body>

@@ -1,0 +1,11 @@
+html {
+    min-height: 100%;
+}
+
+body {
+    background-color: #e3e3e3;
+}
+
+.panel {
+    box-shadow: 0 6px 9px rgba(0,0,0,.05);
+}
