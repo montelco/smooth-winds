@@ -22,9 +22,9 @@ class CreateAuthorsTable extends Migration
             $table->timestamps();
             $table->softDeletes(); 
         });
-        // Schema::table('authors', function (Blueprint $table) {
-        //     $table->foreign('article_id')->references('id')->on('articles');
-        // });
+        Schema::table('authors', function (Blueprint $table) {
+            $table->foreign('article_id')->references('id')->on('articles');
+        });
     }
 
     /**
