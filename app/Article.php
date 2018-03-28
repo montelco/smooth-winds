@@ -2,24 +2,40 @@
 
 namespace App;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
-    use Uuids;
 
     protected $fillable = [
-        'journals_uuid',
-        'title',
-        'pages',
-        'publication_date'
+        'doi',
+        'journal',
+        'name',
+        'page',
+        'year',
+        'month',
+        'day',
+        'user_id'
     ];
-
-    public $incrementing = false;
+    protected $appends = [
+        'FriendlyTime'
+    ];
 
     public function getFriendlyTimeAttribute()
     {
         return $this->updated_at->diffForHumans();
     }
-
+    public function authors()
+    {
+        return $this->hasMany('\App\Author');
+    }
+    public function categories()
+    {
+        return $this->morphToMany('App\Category', 'categories_articles');
+    }
+    public function user()
+    {
+        return $this->belongsTo('\App\User', 'user_id');
+    }
 }

@@ -30,4 +30,11 @@ class HomeController extends Controller
     {
         return view('new-entry');
     }
+
+    public function view_entries()
+    {
+        return view('view-entries')->with([
+            'feed' => \App\Article::all()
+        ]);
+    }
 }

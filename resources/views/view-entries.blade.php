@@ -8,7 +8,7 @@
                 <div class="panel-heading">
                     <ul class="breadcrumb">
                         <li><a href="{{url('/home')}} ">Home</a></li>
-                        <li class="active">New Entry</li>
+                        <li class="active">View Entries</li>
                     </ul>
                 </div>
 
@@ -21,19 +21,11 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @if ($errors->first('doi_val'))
-                        <div class="alert alert-danger alert-dismissable show" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            {{ $errors->first('doi_val') }}
-                        </div>
-                    @endif
                     <div class="flex fd-c">
                         <div class="jcc">
-                            <h2>Create a New Entry</h2>
+                            <h2>Viewing All Entries</h2>
                         </div>
-                        <div class="form-group flex jc-sa fd-r">
+                        {{-- <div class="form-group flex jc-sa fd-r">
                             <a id="fieldHidden" onclick="$('#doi_field').toggle();">
                                 <div class="btn btn-info" id="doi-import">
                                     DOI Import
@@ -49,7 +41,39 @@
                                 <input class="form-control f-o" type="text" name="doi_val" placeholder="10.1016/j.psych.2018.01.01" aria-label="DOI Field"/>
                                 <input type="submit" class="btn btn-success" value="Import the Article">
                             </div>
-                        </form>
+                        </form> --}}
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Article</th>
+                                    <th>Journal</th>
+                                    <th>Pages</th>
+                                    <th>Year</th>
+                                    <th>DOI</th>
+                                    <th>Comments</th>
+                                    <th>Categories</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if($feed->count())
+                                    @foreach ($feed as $article)
+                                        <tr>
+                                            <td>{{$article->title}}</td>
+                                            <td>{{$article->journal}}</td>
+                                            <td>{{$article->pages}}</td>
+                                            <td>{{$article->year}}</td>
+                                            <td>{{$article->doi}}</td>
+                                            <td>Coming Soon</td>
+                                            <td>Coming Soon</td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        Nothing to show yet. Import an article to get started.
+                                    </tr>
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

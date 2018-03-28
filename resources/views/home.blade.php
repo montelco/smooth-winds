@@ -15,7 +15,7 @@
                     @endif
                     <div class="flex aic jc-sa">
                         <a href="{{ url('/new-entry') }}"><div class="btn btn-success">New Entry</div></a>
-                        <a href="{{ url('/edit-entry') }}"><div class="btn btn-info">Edit Existing</div></a>
+                        <a href="{{ url('/view-entries') }}"><div class="btn btn-info">Edit Existing</div></a>
                     </div>
                 </div>
             </div>

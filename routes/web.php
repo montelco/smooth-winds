@@ -21,4 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/new-entry', 'HomeController@new_entry')->name('new-entry');
 
-Route::post('/search', 'CrossRefController@lookup_doi_article');
+Route::get('/view-entries', 'HomeController@view_entries')->name('view-entries');
+
+Route::post('/search', 'CrossRefController@validate_doi_article');
+
+Route::get('/insert', 'CrossRefController@insert');

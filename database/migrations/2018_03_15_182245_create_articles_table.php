@@ -14,8 +14,18 @@ class CreateArticlesTable extends Migration
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
-            $table->uuid('id');
+            $table->increments('id');
+            $table->string('doi',64);
+            $table->string('journal', 100);
+            $table->string('name',160);
+            $table->integer('page')->unsigned();
+            $table->integer('year')->unsigned();
+            $table->integer('month')->unsigned();
+            $table->integer('day')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
