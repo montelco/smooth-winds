@@ -58,7 +58,7 @@
                                 @if($feed->count())
                                     @foreach ($feed as $article)
                                         <tr>
-                                            <td>{{$article->title}}</td>
+                                            <td>{{$article->name}}</td>
                                             <td>{{$article->journal}}</td>
                                             <td>{{$article->pages}}</td>
                                             <td>{{$article->year}}</td>
