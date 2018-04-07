@@ -31,6 +31,11 @@ class HomeController extends Controller
         return view('new-entry');
     }
 
+    public function show_categories()
+    {
+        return view('categories');
+    }
+
     public function view_entries()
     {
         return view('view-entries')->with([

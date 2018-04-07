@@ -42,7 +42,7 @@
                                 <input type="submit" class="btn btn-success" value="Import the Article">
                             </div>
                         </form> --}}
-                        <table class="table table-hover">
+                        <table class="table table-hover" id="sortable">
                             <thead>
                                 <tr>
                                     <th>Article</th>
@@ -52,6 +52,7 @@
                                     <th>DOI</th>
                                     <th>Comments</th>
                                     <th>Categories</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -60,11 +61,12 @@
                                         <tr>
                                             <td>{{$article->name}}</td>
                                             <td>{{$article->journal}}</td>
-                                            <td>{{$article->pages}}</td>
+                                            <td>{{$article->page}}</td>
                                             <td>{{$article->year}}</td>
                                             <td>{{$article->doi}}</td>
                                             <td>Coming Soon</td>
-                                            <td>Coming Soon</td>
+                                            <td><a href="/categories/{{$article->id}}"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></a></td>
+                                            <td><a href="/discard/{{$article->id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
                                         </tr>
                                     @endforeach
                                 @else
@@ -80,4 +82,10 @@
         </div>
     </div>
 </div>
+<script src="js/app.js" defer="false"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous" defer="false"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 @endsection
