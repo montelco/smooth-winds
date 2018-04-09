@@ -64,7 +64,7 @@
                                             <td>{{$article->page}}</td>
                                             <td>{{$article->year}}</td>
                                             <td>{{$article->doi}}</td>
-                                            <td>Coming Soon</td>
+                                            <td><a href="/comments/{{$article->id}}"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
                                             <td><a href="/categories/{{$article->id}}"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></a></td>
                                             <td><a href="/discard/{{$article->id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
                                         </tr>

@@ -10,6 +10,8 @@ class Category extends Model
     protected $fillable = [
         'id',
         'name',
+        'user_id',
+        'category_type'
     ];
     protected $appends = [
         'FriendlyTime'
@@ -19,8 +21,13 @@ class Category extends Model
     {
         return $this->updated_at->diffForHumans();
     }
+
     public function articles()
     {
-        return $this->morphedByMany('App\Category', 'categories_articles');
+        return $this->belongsToMany('\App\Article');
+    }
+    public function users()
+    {
+        return $this->belongsToMany('\App\User');
     }
 }

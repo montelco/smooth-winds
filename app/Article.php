@@ -35,16 +35,24 @@ class Article extends Model
     {
         return $this->updated_at->diffForHumans();
     }
+    
     public function authors()
     {
         return $this->hasMany('\App\Author');
     }
+
     public function categories()
     {
-        return $this->morphToMany('App\Category', 'categories_articles');
+        return $this->hasMany('App\Category_Article', 'article_id');
     }
+
     public function user()
     {
         return $this->belongsTo('\App\User', 'user_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('\App\Comment');
     }
 }

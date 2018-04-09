@@ -98,7 +98,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     Smooth Winds
-                    <span class="text-muted">A Database Application for <strong>Rowan University</strong> Research</span>
+                    <span class="text-muted">A Database Application for <strong>Rowan</strong> Research</span>
                 </div>
                     @auth
                         <a href="{{ url('/home') }}"><div class="btn btn-success">Dashboard Home</div></a>

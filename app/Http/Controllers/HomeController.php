@@ -42,4 +42,9 @@ class HomeController extends Controller
             'feed' => \App\Article::all()
         ]);
     }
+
+    public function view_comments()
+    {
+        return view('comments');
+    }
 }
