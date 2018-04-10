@@ -28,8 +28,10 @@ Route::get('/categories/{id}', function (\App\Article $id) {
 });
 
 Route::get('/comments/{id}', function (\App\Article $id) {
-	return view('comments')->with('comments', $id->comments);
+	return view('comments')->with('comments', $id->comments)->with('article', $id);
 });
+
+Route::post('/add-comment', 'CommentsController@set_comment');
 
 Route::post('/categories', 'CategoriesController@add_to_article');
 

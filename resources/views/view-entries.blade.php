@@ -11,7 +11,6 @@
                         <li class="active">View Entries</li>
                     </ul>
                 </div>
-
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success alert-dismissable show" role="alert">
@@ -82,6 +81,7 @@
         </div>
     </div>
 </div>
+<link rel="stylesheet" href="/css/table.css">
 <script src="js/app.js" defer="false"></script>
     <script
       src="https://code.jquery.com/jquery-3.3.1.min.js"
