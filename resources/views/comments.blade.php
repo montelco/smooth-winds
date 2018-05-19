@@ -26,12 +26,10 @@
 	            		<ul class="breadcrumb">
 	                        <li><a href="{{url('/home')}} ">Home</a></li>
 	                        <li><a href="{{url('/view-entries')}} ">View Entries</a></li>
-	                        <li class="active">Article # {{ $article->id }}</li>
-	                        <li class="active">Comments</li>
+	                        <li class="active">Comments: {{ $article->name }}</li>
 	                    </ul>
 	            	</div>
 					<div class="panel-body">
-		                
 		                <div class="comments-list">
 		               		@if($comments->count())
 			               		@foreach($comments as $comment)

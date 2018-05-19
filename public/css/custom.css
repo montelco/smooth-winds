@@ -9,3 +9,8 @@ body {
 .panel {
     box-shadow: 0 6px 9px rgba(0,0,0,.05);
 }
+
+form input[type=select] {
+    width: 100%;
+    min-height: 4ch;
+}

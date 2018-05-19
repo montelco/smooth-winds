@@ -25,21 +25,31 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'pivot'
     ];
 
     public function articles()
     {
-        return $this->hasMany('\App\Article');
-    }
-
-    public function categories_articles()
-    {
-        return $this->hasMany('\App\Category_Article');
+        return $this->belongsToMany('\App\Article', 'article_tag_user');
     }
 
     public function comments()
     {
         return $this->hasMany('\App\Comment');
+    }
+
+    public function obstacles()
+    {
+        return $this->hasMany('\App\Obstacle');
+    }
+
+    public function evidences()
+    {
+        return $this->hasMany('\App\Evidence');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany('\App\Tag', 'article_tag_user');
     }
 }

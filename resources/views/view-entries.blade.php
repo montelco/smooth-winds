@@ -45,12 +45,9 @@
                             <thead>
                                 <tr>
                                     <th>Article</th>
-                                    <th>Journal</th>
-                                    <th>Pages</th>
                                     <th>Year</th>
-                                    <th>DOI</th>
                                     <th>Comments</th>
-                                    <th>Categories</th>
+                                    <th>Tags</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
@@ -58,11 +55,8 @@
                                 @if($feed->count())
                                     @foreach ($feed as $article)
                                         <tr>
-                                            <td>{{$article->name}}</td>
-                                            <td>{{$article->journal}}</td>
-                                            <td>{{$article->page}}</td>
+                                            <td><a href="https://rowan.summon.serialssolutions.com/search?ho=t&l=en&q=(DOI:({{$article->doi}}))">{{$article->name}}</a></td>
                                             <td>{{$article->year}}</td>
-                                            <td>{{$article->doi}}</td>
                                             <td><a href="/comments/{{$article->id}}"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
                                             <td><a href="/categories/{{$article->id}}"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></a></td>
                                             <td><a href="/discard/{{$article->id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>

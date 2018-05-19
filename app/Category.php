@@ -24,10 +24,10 @@ class Category extends Model
 
     public function articles()
     {
-        return $this->belongsToMany('\App\Article');
+        return $this->belongsToMany('\App\Article', 'categories_articles', 'article_id', 'category_id');
     }
-    public function users()
+    public function objects()
     {
-        return $this->belongsToMany('\App\User');
+        return $this->belongsToMany('\App\Category_Article', 'id');
     }
 }

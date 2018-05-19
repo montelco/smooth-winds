@@ -26,6 +26,11 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function doi_prefetch()
+    {
+        return view('doi');
+    }
+
     public function new_entry()
     {
         return view('new-entry');

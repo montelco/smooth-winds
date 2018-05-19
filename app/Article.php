@@ -27,6 +27,11 @@ class Article extends Model
         'day',
         'user_id'
     ];
+
+    protected $hidden = [
+        'pivot'
+    ];
+
     protected $appends = [
         'FriendlyTime'
     ];
@@ -41,18 +46,29 @@ class Article extends Model
         return $this->hasMany('\App\Author');
     }
 
-    public function categories()
+    public function obstacles()
     {
-        return $this->hasMany('App\Category_Article', 'article_id');
+        return $this->hasMany('\App\Obstacle');
     }
 
-    public function user()
+    public function evidences()
     {
-        return $this->belongsTo('\App\User', 'user_id');
+        return $this->hasMany('\App\Evidence');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany('\App\Tag', 'article_tag_user');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('\App\User', 'article_tag_user');
     }
 
     public function comments()
     {
         return $this->hasMany('\App\Comment');
     }
+
 }
