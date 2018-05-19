@@ -24,23 +24,6 @@
                         <div class="jcc">
                             <h2>Viewing All Entries</h2>
                         </div>
-                        {{-- <div class="form-group flex jc-sa fd-r">
-                            <a id="fieldHidden" onclick="$('#doi_field').toggle();">
-                                <div class="btn btn-info" id="doi-import">
-                                    DOI Import
-                                </div>
-                            </a>
-                            <div class="btn btn-default" id="manual">
-                                Create Manually
-                            </div>
-                        </div>
-                        <form id="doi_field" action="/search" method="POST" style="display: none">
-                            <div class="form-group flex fd-r">
-                                {{ csrf_field() }}
-                                <input class="form-control f-o" type="text" name="doi_val" placeholder="10.1016/j.psych.2018.01.01" aria-label="DOI Field"/>
-                                <input type="submit" class="btn btn-success" value="Import the Article">
-                            </div>
-                        </form> --}}
                         <table class="table table-hover" id="sortable">
                             <thead>
                                 <tr>
@@ -55,7 +38,13 @@
                                 @if($feed->count())
                                     @foreach ($feed as $article)
                                         <tr>
-                                            <td><a href="https://rowan.summon.serialssolutions.com/search?ho=t&l=en&q=(DOI:({{$article->doi}}))">{{$article->name}}</a></td>
+                                            <td>
+                                                @if(isset($article->doi))
+                                                    <a target="_blank" href="https://rowan.summon.serialssolutions.com/search?ho=t&l=en&q=(DOI:({{$article->doi}}))">{{$article->name}}</a>
+                                                @else
+                                                    <abbr title="No DOI record to link.">{{$article->name}}</abbr>
+                                                @endif
+                                            </td>
                                             <td>{{$article->year}}</td>
                                             <td><a href="/comments/{{$article->id}}"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
                                             <td><a href="/categories/{{$article->id}}"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></a></td>
@@ -69,6 +58,13 @@
                                 @endif
                             </tbody>
                         </table>
+                    </div>
+                    <div class="form-group flex jc-sa fd-r">
+                        <a href="/new-entry">
+                            <div class="btn btn-default btn-info" id="import">
+                                Import An Article
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>

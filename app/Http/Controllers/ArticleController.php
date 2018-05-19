@@ -19,6 +19,7 @@ class ArticleController extends Controller
 
     public function discard($article_id)
     {
-    	return Auth::user()->name . ' tried to delete ' . \App\Article::where('id', $article_id)->pluck('name') . ' but never accounted for the fact that this method was not written yet.';
+    	\App\Article::where('id', $article_id)->delete();
+        return redirect('view-entries')->with('status', 'Article has been successfully trashed. Articles are kept in recycling for 90 days in case of accidental deletion.');
     }
 }

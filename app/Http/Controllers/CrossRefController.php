@@ -89,13 +89,16 @@ class CrossRefController extends Controller
         $result = $this->lookup_from_api($request);
         $article_id = $newRecord->id;
 
-        for($i=0;$i <= count($result['message']['author'])-1;$i++) {
-            \App\Author::create([
-                'family_name' => $result['message']['author'][$i]['family'],
-                'given_name' => $result['message']['author'][$i]['given'],
-                'article_id' => $article_id,
-            ]);
+        if($request->doi_val){
+            for($i=0;$i <= count($result['message']['author'])-1;$i++) {
+                \App\Author::create([
+                    'family_name' => $result['message']['author'][$i]['family'],
+                    'given_name' => $result['message']['author'][$i]['given'],
+                    'article_id' => $article_id,
+                ]);
+            }
         }
+        
         return redirect('new-entry')->with('status', 'Imported your document successfully. Please visit the Edit page to add attributes');
     }
 }
