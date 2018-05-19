@@ -5,3 +5,4 @@ td {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+div.flex.fd-c #sortable_wrapper div.row:nth-of-type(2) div.col-sm-12 { overflow:scroll; }

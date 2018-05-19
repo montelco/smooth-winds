@@ -19,6 +19,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                             {{ session('status') }}
+                            <a href="{{ url('/view-entries') }}"><div class="btn btn-info">Edit Existing Article</div></a>
                         </div>
                     @endif
                     @if ($errors->first('doi_val'))

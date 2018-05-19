@@ -72,7 +72,7 @@ class CrossRefController extends Controller
                 'article_id' => $article_id,
             ]);
         }
-        return redirect('new-entry')->with('status', 'Imported your document successfully. Please visit the Edit page to add attributes');
+        return redirect('view-entries')->with('status', 'Imported your document successfully.');
     }
     public function manual_insert(Request $request)
     {
@@ -99,6 +99,6 @@ class CrossRefController extends Controller
             }
         }
         
-        return redirect('new-entry')->with('status', 'Imported your document successfully. Please visit the Edit page to add attributes');
+        return redirect('view-entries')->with('status', 'Imported your document successfully.');
     }
 }

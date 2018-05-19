@@ -75,7 +75,7 @@
                                 <form id="article_categories_3" class="col-xs-12 col-md-12" action="/categories" method="POST">
                                     <div class="form-group flex fd-r">
                                         {{ csrf_field() }}
-                                        <input type="hidden" name="type" value="3">
+                                        <input type="hidden" name="type" value="4">
                                         <input type="hidden" name="article" value="{{$article['0']->id}}">
                                         <input type="select" id="taggable" placeholder="Select categories or enter new one...">
                                         <input type="submit" class="btn btn-success" value="Add Tags">
@@ -89,7 +89,7 @@
                                 <form id="article_categories_3" class="col-xs-12 col-md-12" action="/categories" method="POST">
                                     <div class="form-group flex fd-r">
                                         {{ csrf_field() }}
-                                        <input type="hidden" name="type" value="3">
+                                        <input type="hidden" name="type" value="5">
                                         <input type="hidden" name="article" value="{{$article['0']->id}}">
                                         <input type="select" id="taggable" placeholder="Select categories or enter new one...">
                                         <input type="submit" class="btn btn-success" value="Add Tags">
