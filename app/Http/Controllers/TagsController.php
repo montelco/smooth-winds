@@ -52,7 +52,7 @@ class TagsController extends Controller
         // Lets diff the request from what's already on the article by that user versus all the available tags
         // Then using the diff we should be able to attach
         // >>> $user->tags()->attach(Auth::user()->id, array('article_id' => $request->article, 'tag_id' => {INSERT CALL TO FIRST OR CREATE}));
-        return $this->difference($this->format($request), $this->show_tags_for_article($request->article)->all());
+        return $this->difference($this->format($request), $this->show_tags_for_article($request->article));
     }
 
     public function format(Request $request){
@@ -81,12 +81,14 @@ class TagsController extends Controller
 
     public function users_tagged_articles()
     {
+        // Deprecation
         return \App\User::where('id', Auth::user()->id)->with('tags.articles')->get();
     }
 
     public function tags_on_article($user_collected, $article_id)
     {
         // Now we need to go the other way and dig into the tag to find which ones have been applied to which articles
+        // Deprecation
         if ($user_collected['0']->articles->where('id', $article_id)->take(1)->nth(1)) {
             return $user_collected['0']->articles->where('id', $article_id)->take(1)->nth(1);
         } else {
@@ -96,6 +98,7 @@ class TagsController extends Controller
 
     public function users_tags($collected_tags)
     {
+        // Deprecation
         if ($collected_tags[0]->tags->pluck('name')) {
             return $collected_tags[0]->tags->pluck('name');
         } else {
@@ -105,7 +108,9 @@ class TagsController extends Controller
 
     public function show_tags_for_article($article_id)
     {
-        return $this->users_tags($this->tags_on_article($this->users_tagged_articles(), $article_id));
+        $article = \App\Article::findOrFail($article_id);
+        return $article->tags()->where('user_id', Auth::user()->id)->pluck('name');
+        // return $this->users_tags($this->tags_on_article($this->users_tagged_articles(), $article_id));
     }
 
     public function display_view($article_id)

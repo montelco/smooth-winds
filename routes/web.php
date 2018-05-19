@@ -35,9 +35,11 @@ Route::get('/categories/{id}', 'TagsController@display_view');
 
 Route::get('/discard/{article_id}', 'ArticleController@discard');
 
-Route::get('/demo-tagged', function () {
-	return data_get(collect(App\User::find(Auth::user()->id)->with(['articles_tags.tags'])->get()), '*.articles_tags.*.tags.name');
-});
+// Route::get('/demo-tagged', function () {
+// 	return data_get(collect(App\User::find(Auth::user()->id)->with(['articles_tags.tags'])->get()), '*.articles_tags.*.tags.name');
+// });
+
+Route::get('/demo-tagged/{article_id}', 'TagsController@show_tags_for_article');
 
 Route::get('/comments/{id}', function (\App\Article $id) {
 	return view('comments')->with('comments', $id->comments)->with('article', $id);
