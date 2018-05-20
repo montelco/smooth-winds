@@ -25,7 +25,7 @@ Route::get('/doi', 'HomeController@doi_prefetch')->name('doi');
 
 Route::post('/doi-prefill', 'CrossRefController@prefill_doi_article');
 
-Route::get('/tags.json', 'TagsController@json_categories');
+Route::get('/tags/tags.json', 'TagsController@json_categories');
 
 Route::get('/diff-demo/{params}', 'TagsController@diff');
 

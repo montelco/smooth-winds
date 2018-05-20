@@ -42,17 +42,20 @@ class TagsController extends Controller
 
     public function add_to_article(Request $request)
     {
-        $this->validate($request, [
-            'type' => 'required',
-            'taggable' => 'required',
-            'article' => 'required',
-        ]);
+        $user = $request->user();
+        $tags = collect($this->ids_for_list($request));
+        $user->tags()->where('type', $request->type)->wherePivot('article_id', $request->article)->detach();
+        foreach ($this->ids_for_list($request) as $tag_id) {
+            $user->tags()->attach(Auth::user()->id, array('article_id' => $request->article, 'tag_id' => $tag_id));
+        }
+        return redirect('/categories/'.$request->article);
+        
+        // return $user->tags()->sync(array('article_id' => $request->article, 'tag_id' => $tags, 'user_id' => Auth::user()->id));
+    }
 
-        // Do we want to run attach at this point or what?
-        // Lets diff the request from what's already on the article by that user versus all the available tags
-        // Then using the diff we should be able to attach
-        // >>> $user->tags()->attach(Auth::user()->id, array('article_id' => $request->article, 'tag_id' => {INSERT CALL TO FIRST OR CREATE}));
-        return $this->difference($this->format($request), $this->show_tags_for_article($request->article));
+    public function ids_for_list(Request $request)
+    {
+        return \App\Tag::whereIn('name', $request->name)->pluck('id');
     }
 
     public function format(Request $request){
@@ -118,6 +121,7 @@ class TagsController extends Controller
         return view('categories')
             ->with([
                 'article' => \App\Article::where('id', $article_id)->get(),
+                'all_tags' => $this->all_pluck_field('name'),
                 'tags' => $this->show_tags_for_article($article_id),
                 'tags_compressed' => collect($this->show_tags_for_article($article_id))->implode(','),
             ]);

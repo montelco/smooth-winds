@@ -1,15 +1,15 @@
-var citynames = new Bloodhound({
+var names = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
   prefetch: {
-    url: 'assets/tags.json',
+    url: 'tags/1/tags.json',
     filter: function(list) {
-      return $.map(list, function(cityname) {
-        return { name: cityname }; });
+      return $.map(list, function(name) {
+        return { name: name }; });
     }
   }
 });
-citynames.initialize();
+names.initialize();
 
 var cities = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),
@@ -24,10 +24,10 @@ cities.initialize();
 var elt = $('.example_typeahead > > input');
 elt.tagsinput({
   typeaheadjs: {
-    name: 'citynames',
+    name: 'tags1',
     displayKey: 'name',
     valueKey: 'name',
-    source: citynames.ttAdapter()
+    source: names.ttAdapter()
   }
 });
 
