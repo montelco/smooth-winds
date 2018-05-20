@@ -33,6 +33,16 @@ Route::get('/view-entries', 'HomeController@view_entries')->name('view-entries')
 
 Route::get('/categories/{id}', 'TagsController@display_view');
 
+Route::get('/categories/editor/edit/{article_id?}', 'TagsController@display_update_new');
+
+Route::post('/categories/editor/edit/create', 'TagsController@create');
+
+Route::post('/categories/editor/edit/update', 'TagsController@update');
+
+Route::get('/categories/editor/discard/{tag_id}', 'TagsController@discard');
+
+Route::get('/categories/editor/list', 'TagsController@display_editor');
+
 Route::get('/discard/{article_id}', 'ArticleController@discard');
 
 Route::get('/sorted-tags', 'TagsController@categorized');

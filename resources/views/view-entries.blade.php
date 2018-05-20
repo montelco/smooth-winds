@@ -46,7 +46,7 @@
                                                 @endif
                                             </td>
                                             <td>{{$article->year}}</td>
-                                            <td><a href="/comments/{{$article->id}}">{{$article->comments()->count()}}<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                                            <td><a href="/comments/{{$article->id}}">{{$article->comments()->count()}} {{str_plural('comment', $article->comments()->count())}}{{-- <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> --}}</a></td>
                                             <td><a href="/categories/{{$article->id}}"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></a></td>
                                             <td><a href="/discard/{{$article->id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
                                         </tr>
@@ -60,6 +60,9 @@
                         </table>
                     </div>
                     <div class="form-group flex jc-sa fd-r">
+                        @if(Auth::user()->email == "monteleoc8@students.rowan.edu" || Auth::user()->email == "fife@rowan.edu")
+                            <a href="{{ url('/categories/editor/list') }}"><div class="btn btn-danger">Admin: Tag Manager</div></a>
+                        @endif
                         <a href="/new-entry">
                             <div class="btn btn-default btn-info" id="import">
                                 Import An Article
@@ -72,10 +75,7 @@
     </div>
 </div>
 <link rel="stylesheet" href="/css/table.css">
-<script src="js/app.js" defer="false"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.min.js"
-      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-      crossorigin="anonymous" defer="false"></script>
+{{-- <script src="js/app.js" defer="false"></script> --}}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous" defer="false"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
 @endsection

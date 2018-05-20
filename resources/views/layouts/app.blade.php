@@ -58,6 +58,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                                    <div style="max-height: 30px;min-width: 30px;text-align: center;line-height: 30px;border-radius: 50%;color: white;background: gray;font-size: 15px; display: inline-block;">{{ Auth::user()->name['0'] }}</div>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -68,10 +69,20 @@
                                                      document.getElementById('logout-form').submit();">
                                             Logout
                                         </a>
-
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/new-entry') }}"><div class="btn btn-success" style="width:100%">New Entry</div></a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('/view-entries') }}"><div class="btn btn-info" style="width:100%">Edit Existing</div></a>
+                                    </li>
+                                    <li>
+                                        @if(Auth::user()->email == "monteleoc8@students.rowan.edu" || Auth::user()->email == "fife@rowan.edu")
+                                            <a href="{{ url('/categories/editor/list') }}"><div class="btn btn-danger" style="width:100%">Admin: Tag Manager</div></a>
+                                        @endif
                                     </li>
                                 </ul>
                             </li>

@@ -17,22 +17,45 @@ class TagsController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function get_categories()
-    {
-        return view('view-categories');
-    }
     public function json_categories()
     {
         return response()->json($this->all_pluck_field('name'));
     }
+
     public function all_pluck_field(string $field)
     {
         return \App\Tag::all()->pluck($field);
+    }
+
+    public function create(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|max:64',
+            'type' => 'required|numeric',
+        ]);
+
+        $tag = new \App\Tag;
+        $tag->create([
+            'name' => collect($this->format($request->name))['0'],
+            'type' => $request->type,
+        ]);
+        return redirect('/categories/editor/list')->with('status', 'Created your new tag successfully.');
+    }
+
+    public function update(Request $request)
+    {
+        $tag = \App\Tag::find($request->id);
+        $tag->update([
+            'name' => collect($this->format($request->name))['0'],
+            'type' => $request->type,
+        ]);
+        return redirect('/categories/editor/list')->with('status', 'Updated tag successfully.');
+    }
+
+    public function discard($article_id)
+    {
+        \App\Tag::where('id', $article_id)->delete();
+        return redirect('/categories/editor/list')->with('delete-status', 'Tag has been successfully trashed. Tags are kept in recycling for 90 days in case of accidental deletion.');
     }
 
     public function all()
@@ -49,7 +72,7 @@ class TagsController extends Controller
     {
         $user = $request->user();
         $tags = collect($this->ids_for_list($request));
-        $user->tags()->where('type', $request->type)->wherePivot('article_id', $request->article)->detach();
+        $user->tags()->where('type', $request->type)->wherePivot('article_id', $request->article)->detach(collect($user->tags()->where('type', $request->type)->wherePivot('article_id', $request->article)->pluck('id')));
         foreach ($this->ids_for_list($request) as $tag_id) {
             $user->tags()->attach(Auth::user()->id, array('article_id' => $request->article, 'tag_id' => $tag_id));
         }
@@ -63,8 +86,12 @@ class TagsController extends Controller
         return \App\Tag::whereIn('name', $request->name)->pluck('id');
     }
 
-    public function format(Request $request){
+    public function format_array(Request $request){
         return $this->dashCasing($this->trim($this->individualize($this->lowerCase($request->taggable))));
+    }
+
+    public function format($name){
+        return $this->dashCasing($this->lowerCase($name));
     }
 
     public function lowerCase($taggables)
@@ -138,5 +165,29 @@ class TagsController extends Controller
                 'tags' => $this->show_tags_for_article($article_id),
                 'tags_compressed' => collect($this->show_tags_for_article($article_id))->implode(','),
             ]);
+    }
+
+    public function display_editor()
+    {
+        return view('tag-editor')
+            ->with([
+                'feed' => $this->all(),
+            ]);
+    }
+
+    public function display_update_new($tag_id = null)
+    {
+        if($tag_id != null) {
+            return view('tag-composer')
+                ->with([
+                    'update' => \App\Tag::find($tag_id),
+                ]);
+        } else {
+            return view('tag-composer')
+                ->with([
+                    'update' => null,
+                ]);
+        }
+        
     }
 }

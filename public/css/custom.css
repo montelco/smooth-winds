@@ -15,6 +15,21 @@ form input[type=select], form input[data-role=tagsinput] {
     min-height: 4ch;
 }
 
+div.form-group.padded{
+    background: #fcfcfc;
+    padding: 0.5em;
+}
+
+div.form-group.grey{
+    background: #f5f5f5;
+    margin-top: 1em;
+    padding: 0.25em 1em;
+}
+
+div.form-group.grey:not(:last-of-type){
+    margin-bottom: 1em;
+}
+
 /*form div.form-group.no-bm {
 	margin-bottom: 1px;
 }*/
