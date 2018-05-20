@@ -14,3 +14,7 @@ form input[type=select], form input[data-role=tagsinput] {
     width: 100%;
     min-height: 4ch;
 }
+
+/*form div.form-group.no-bm {
+	margin-bottom: 1px;
+}*/

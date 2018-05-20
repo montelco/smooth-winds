@@ -35,9 +35,7 @@ Route::get('/categories/{id}', 'TagsController@display_view');
 
 Route::get('/discard/{article_id}', 'ArticleController@discard');
 
-// Route::get('/demo-tagged', function () {
-// 	return data_get(collect(App\User::find(Auth::user()->id)->with(['articles_tags.tags'])->get()), '*.articles_tags.*.tags.name');
-// });
+Route::get('/sorted-tags', 'TagsController@categorized');
 
 Route::get('/demo-tagged/{article_id}', 'TagsController@show_tags_for_article');
 

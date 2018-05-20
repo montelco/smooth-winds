@@ -46,7 +46,7 @@
                                                 @endif
                                             </td>
                                             <td>{{$article->year}}</td>
-                                            <td><a href="/comments/{{$article->id}}"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
+                                            <td><a href="/comments/{{$article->id}}">{{$article->comments()->count()}}<span class="glyphicon glyphicon-comment" aria-hidden="true"></span></a></td>
                                             <td><a href="/categories/{{$article->id}}"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span></a></td>
                                             <td><a href="/discard/{{$article->id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
                                         </tr>

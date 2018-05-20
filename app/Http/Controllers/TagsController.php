@@ -35,6 +35,11 @@ class TagsController extends Controller
         return \App\Tag::all()->pluck($field);
     }
 
+    public function all()
+    {
+        return \App\Tag::all();
+    }
+
     public function difference($taggables, $database)
     {
         return collect($taggables->diff($database));
@@ -70,6 +75,14 @@ class TagsController extends Controller
     public function trim($taggables)
     {
         return array_map('trim', $taggables);
+    }
+
+    public function categorized()
+    {
+        $all = $this->all();
+        return collect($all->mapToGroups(function($all) {
+            return [$all['type'] => $all['name']];
+        }));
     }
 
     public function dashCasing($taggables)
@@ -121,7 +134,7 @@ class TagsController extends Controller
         return view('categories')
             ->with([
                 'article' => \App\Article::where('id', $article_id)->get(),
-                'all_tags' => $this->all_pluck_field('name'),
+                'all_tags' => $this->categorized(),
                 'tags' => $this->show_tags_for_article($article_id),
                 'tags_compressed' => collect($this->show_tags_for_article($article_id))->implode(','),
             ]);

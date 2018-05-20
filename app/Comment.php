@@ -11,7 +11,7 @@ class Comment extends Model
 	use SoftDeletes;
 
 	protected $appends = [
-		'FriendlyTime'
+		'FriendlyTime', 'CommentsCount'
 	];
 
 	protected $dates = ['deleted_at'];
@@ -35,5 +35,10 @@ class Comment extends Model
     public function article()
     {
     	return $this->belongsTo('\App\Article');
+    }
+
+    public function getCommentsCount()
+    {
+        return $this->comments()->count();
     }
 }
