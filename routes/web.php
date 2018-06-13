@@ -19,6 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/about', 'HomeController@about')->name('about');
+
+Route::get('/team', 'HomeController@team')->name('team');
+
 Route::get('/new-entry', 'HomeController@new_entry')->name('new-entry');
 
 Route::get('/doi', 'HomeController@doi_prefetch')->name('doi');
