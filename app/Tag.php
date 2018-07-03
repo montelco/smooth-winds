@@ -26,4 +26,9 @@ class Tag extends Model
     {
         return $this->belongsToMany('\App\Article', 'article_tag_user');
     }
+
+    public function atu()
+    {
+        return $this->hasMany('\App\ArticleTagUser');
+    }
 }

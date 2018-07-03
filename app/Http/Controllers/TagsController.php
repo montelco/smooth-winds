@@ -156,6 +156,13 @@ class TagsController extends Controller
         // return $this->users_tags($this->tags_on_article($this->users_tagged_articles(), $article_id));
     }
 
+    public function show_tagged_for_article($article_id)
+    {
+        $article = \App\Article::findOrFail($article_id);
+        return $article->atu->where('user_id', Auth::user()->id);
+        // return $this->users_tags($this->tags_on_article($this->users_tagged_articles(), $article_id));
+    }
+
     public function display_view($article_id)
     {
         return view('categories')
@@ -163,6 +170,7 @@ class TagsController extends Controller
                 'article' => \App\Article::where('id', $article_id)->get(),
                 'all_tags' => $this->categorized(),
                 'tags' => $this->show_tags_for_article($article_id),
+                'tagged' => $this->show_tagged_for_article($article_id),
                 'tags_compressed' => collect($this->show_tags_for_article($article_id))->implode(','),
             ]);
     }

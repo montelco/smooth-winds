@@ -119,7 +119,7 @@
                                 <form id="article_categories_3" class="col-xs-12 col-md-12" action="/categories" method="POST">
                                     <div class="form-group grey">
                                         <h4>Evidence</h4>
-                                        <section class="grid-container">
+                                        {{-- <section class="grid-container">
                                             {{ csrf_field() }}
                                             <input type="hidden" name="type" value="3">
                                             <input type="hidden" name="article" value="{{$article['0']->id}}">
@@ -131,6 +131,26 @@
                                                 @else
                                                     <div class="no-bm">
                                                         <input class="list" type="checkbox" name="name[]" value="{{$tag}}"><label class= "list" for="name[{{$tag}}]">{{$tag}}</label>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </section> --}}
+                                        //Remember to insert new file reference.
+                                        <section class="grid-container">
+                                            {{ csrf_field() }}
+                                            @foreach($all_tags[0] as $tag)
+                                                @if(in_array($tag, $tags->toArray()))
+                                                    <div class="no-bm">
+                                                        <span style="flex: 0; display: inline-block; margin-bottom: 2px; background: rgba(0,0,0,0.8); color: white; border-radius: 2px; padding: 6px;">{{$tag}}</span>
+                                                        <span class="btn btn-success">+</span>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                            @foreach($all_tags[1] as $tag)
+                                                @if(in_array($tag, $tags->toArray()))
+                                                    <div class="no-bm">
+                                                        <span style="flex: 0; display: inline-block; margin-bottom: 2px; background: rgba(0,0,0,0.8); color: white; border-radius: 2px; padding: 6px;">{{$tag}}</span>
+                                                        <span class="btn btn-success">+</span>
                                                     </div>
                                                 @endif
                                             @endforeach

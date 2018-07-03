@@ -5,7 +5,7 @@ namespace App;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
-class Article extends Model
+class ArticleTagUser extends Model
 {
 
     /**
@@ -22,8 +22,6 @@ class Article extends Model
         'user_id'
     ];
 
-    protected $table = [
-        'article_tag_user'
-    ];
+    protected $table = 'article_tag_user';
 
 }

@@ -28,9 +28,9 @@ class Article extends Model
         'user_id'
     ];
 
-    protected $hidden = [
-        'pivot'
-    ];
+    // protected $hidden = [
+    //     'pivot'
+    // ];
 
     protected $appends = [
         'FriendlyTime'
@@ -56,9 +56,14 @@ class Article extends Model
         return $this->hasMany('\App\Evidence');
     }
 
+    public function atu()
+    {
+        return $this->hasMany('\App\ArticleTagUser');
+    }
+
     public function tags()
     {
-        return $this->belongsToMany('\App\Tag', 'article_tag_user');
+        return $this->belongsToMany('\App\Tag', 'article_tag_user')->withPivot('id');
     }
 
     public function users()
